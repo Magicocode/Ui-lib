@@ -1,0 +1,88 @@
+local UILibrary = {}
+
+function UILibrary:CreateUI()
+    local ScreenGui = Instance.new("ScreenGui")
+    ScreenGui.Name = "CustomUILib"
+    ScreenGui.ResetOnSpawn = false
+    
+    local MainFrame = Instance.new("Frame")
+    MainFrame.Size = UDim2.new(0, 400, 0, 300)
+    MainFrame.Position = UDim2.new(0.5, -200, 0.5, -150)
+    MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+    MainFrame.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+    MainFrame.BorderSizePixel = 0
+    MainFrame.Parent = ScreenGui
+    
+    local UICorner = Instance.new("UICorner")
+    UICorner.CornerRadius = UDim.new(0, 10)
+    UICorner.Parent = MainFrame
+    
+    local TopBar = Instance.new("Frame")
+    TopBar.Size = UDim2.new(1, 0, 0, 30)
+    TopBar.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+    TopBar.BorderSizePixel = 0
+    TopBar.Parent = MainFrame
+    
+    local CloseButton = Instance.new("TextButton")
+    CloseButton.Size = UDim2.new(0, 30, 0, 30)
+    CloseButton.Position = UDim2.new(1, -30, 0, 0)
+    CloseButton.Text = "X"
+    CloseButton.TextColor3 = Color3.new(1, 1, 1)
+    CloseButton.BackgroundColor3 = Color3.new(0.8, 0.1, 0.1)
+    CloseButton.BorderSizePixel = 0
+    CloseButton.Parent = TopBar
+    
+    local MinimizeButton = Instance.new("TextButton")
+    MinimizeButton.Size = UDim2.new(0, 30, 0, 30)
+    MinimizeButton.Position = UDim2.new(1, -60, 0, 0)
+    MinimizeButton.Text = "-"
+    MinimizeButton.TextColor3 = Color3.new(1, 1, 1)
+    MinimizeButton.BackgroundColor3 = Color3.new(0.1, 0.1, 0.8)
+    MinimizeButton.BorderSizePixel = 0
+    MinimizeButton.Parent = TopBar
+    
+    local DeleteButton = Instance.new("TextButton")
+    DeleteButton.Size = UDim2.new(0, 30, 0, 30)
+    DeleteButton.Position = UDim2.new(1, -90, 0, 0)
+    DeleteButton.Text = "D"
+    DeleteButton.TextColor3 = Color3.new(1, 1, 1)
+    DeleteButton.BackgroundColor3 = Color3.new(0.1, 0.8, 0.1)
+    DeleteButton.BorderSizePixel = 0
+    DeleteButton.Parent = TopBar
+    
+    local Tabs = Instance.new("Frame")
+    Tabs.Size = UDim2.new(1, 0, 1, -30)
+    Tabs.Position = UDim2.new(0, 0, 0, 30)
+    Tabs.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+    Tabs.BorderSizePixel = 0
+    Tabs.Parent = MainFrame
+    
+    local TabButton = Instance.new("TextButton")
+    TabButton.Size = UDim2.new(0, 100, 0, 30)
+    TabButton.Position = UDim2.new(0, 0, 0, 0)
+    TabButton.Text = "Tab 1"
+    TabButton.TextColor3 = Color3.new(1, 1, 1)
+    TabButton.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+    TabButton.BorderSizePixel = 0
+    TabButton.Parent = Tabs
+    
+    local function ToggleVisibility()
+        MainFrame.Visible = not MainFrame.Visible
+    end
+    
+    CloseButton.MouseButton1Click:Connect(function()
+        ScreenGui:Destroy()
+    end)
+    
+    MinimizeButton.MouseButton1Click:Connect(function()
+        MainFrame.Visible = false
+    end)
+    
+    DeleteButton.MouseButton1Click:Connect(function()
+        MainFrame.Visible = true
+    end)
+    
+    return ScreenGui, ToggleVisibility
+end
+
+return UILibrary
